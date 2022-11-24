@@ -23,6 +23,8 @@ lastlog() {
   date >~/.lastlog.dynmotd
 }
 
+diskinfo() { df / -h | sed -n 2p; }
+
 dependenciesDir=../../usr/local/lib/dynmotd
 
 cat ${dependenciesDir}/header.txt
@@ -33,7 +35,7 @@ echo
 echo -e "    Date and time:\t" $(echo $(date '+%A, %d %B %Y %R %Z'))
 echo -e "    Uptime:\t\t" $(uptime -p)
 echo -e "    Kernel info:\t" $(uname -smr)
-echo -e "    Disk space used:\t" $(df -h | grep sda3 | awk '{print $5}')"   "$(df -h | grep sda3 | awk '{print $3}') / $(df -h | grep sda3 | awk '{print $2}') " ("$(df -h | grep sda3 | awk '{print $4}') "своб.)"
+echo -e "    Disk space used:\t" $(diskinfo | awk '{print $5}')"   "$(diskinfo | awk '{print $3}') / $(diskinfo | awk '{print $2}') " ("$(diskinfo | awk '{print $4}') "free)"
 echo
 echo -e "    Hostname:\t\t" $(hostname)
 echo -e "    Sessions:\t\t $(sessions)"
