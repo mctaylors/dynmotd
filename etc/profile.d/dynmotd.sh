@@ -29,14 +29,15 @@ dependenciesDir=../../usr/local/lib/dynmotd
 
 cat ${dependenciesDir}/header.txt
 
-echo
-echo -e "    MOTD:\t\t" $(cat ${dependenciesDir}/motd.txt)
-echo
-echo -e "    Date and time:\t" $(echo $(date '+%A, %d %B %Y %R %Z'))
-echo -e "    Uptime:\t\t" $(uptime -p)
-echo -e "    Kernel info:\t" $(uname -smr)
-echo -e "    Disk space used:\t" $(diskinfo | awk '{print $5}')"   "$(diskinfo | awk '{print $3}') / $(diskinfo | awk '{print $2}') " ("$(diskinfo | awk '{print $4}') "free)"
-echo
-echo -e "    Hostname:\t\t" $(hostname)
-echo -e "    Sessions:\t\t $(sessions)"
-echo -e "    Last login:\t\t $(lastlog)"
+echo -e "
+    MOTD:\t\t $(cat ${dependenciesDir}/motd.txt)
+
+    Date and time:\t $(date '+%A, %d %B %Y %R %Z')
+    Uptime:\t\t $(uptime -p)
+    Kernel info:\t $(uname -smr)
+    Disk space used:\t $(diskinfo | awk '{print $5}')  $(diskinfo | awk '{print $3}') / $(diskinfo | awk '{print $2}')  ($(diskinfo | awk '{print $4}') free)
+
+    Hostname:\t\t $(hostname)
+    Sessions:\t\t $(sessions)
+    Last login:\t\t $(lastlog)
+"
